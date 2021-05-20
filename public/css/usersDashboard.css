@@ -1,0 +1,127 @@
+body{
+    font-family: montserrat;
+}
+.mainNav{
+    background: #55a7bf;
+}
+.mainNav a {
+    color: #fff;
+}
+.navbarDownDiv{
+    height: 100px;
+    background: #55a7bf;
+}
+.sidebar{
+    background: #fff;
+    width: 220px;
+    height: 100%;
+    position: absolute;
+    top:50px;
+    border-radius: 0 10px 0 0px;
+    box-shadow:  1px 0 3px 0 #aaa;
+    z-index: 99;
+}
+.sidebarProfileDiv{
+    height: 150px;
+    width: 100%;
+}
+.sidebarProfileDiv > img {
+    position: relative;
+    border-radius: 200px;
+    height:60px;
+    width: :60px;
+    margin-left: 50%;
+    transform: translateX(-50%);
+    margin-top: 20px; 
+}
+.sidebarProfileName{
+    text-align: center;
+    font-size: 13px;
+    color:#535763;
+    margin:0px;
+    text-transform: uppercase;
+}
+.sidebarProfilePosition{
+    text-align: center;
+    font-size: 12px;
+    color:#535763;
+    margin:0px;
+}
+.mainMenu{
+    margin-top: 10px;
+    font-size: 13px;
+}
+.mainMenuGeneralText{
+    padding:0px 10px;
+    font-weight: 600;
+    color:#535763;
+    margin:0px;
+
+}
+.sidebarMainmenu{
+    margin-top:0px;
+}
+.sidebarMainmenu a{
+   color:#535763;
+} 
+.sidebarMainmenu .fa,.sidebarMainmenu .fas,.sidebarMainmenu .fab{
+    width: 20px;
+}
+
+.sidebarMainmenu .nav-item:hover{
+    background: #eee;
+}
+.nav-item-active{
+    background:  #eee;  
+}
+.mainContentOuter {
+    padding-left: 230px;
+    position: relative;
+    margin-top: -100px;
+}
+.mainContent{
+    height: 500px;
+}
+.mainContent .breadcrumb{
+    padding:5px;
+    background: none;
+}
+.mainContent .breadcrumb li{
+    font-size: 13px;
+    color:#fff;
+}
+.mainContent .breadcrumb a{
+    color:#fff;
+}
+.breadcrumb-item + .breadcrumb-item::before {
+    color:#fff;
+}
+.sidebarToggleBtn{
+    position: relative;
+    height: 30px;
+    width: 30px;
+    cursor: pointer;
+}
+.sidebarToggleBtn > span {
+    background: #fff;
+    width: 25px;
+    height: 2px;
+    position: absolute;
+    transition: .3s;
+}
+.sidebarToggleBtn > .x1{
+    width: 10px;
+}
+.sidebarToggleBtn > .x2{
+    width: 25px; 
+    top: 5px;    
+}
+.sidebarToggleBtn > .x3{
+    width:17px;
+    top: 10px;  
+}
+.sidebarToggleBtn:hover span {
+    width: 25px;
+    transition: .3s;
+}
+
