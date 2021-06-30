@@ -26,6 +26,12 @@ Route::group(['middleware' => 'isAdmin'], function () {
 
 Route::group(['middleware' => 'isUsers'], function () {
     Route::get('/home',[App\Http\Controllers\UsersController::class, 'index']);
+    Route::get('/clients',[App\Http\Controllers\UsersController::class, 'index']);
+    Route::get('/clients/{clientsId}',[App\Http\Controllers\UsersController::class, 'getClientsPage']);
+    Route::post('/addClient',[App\Http\Controllers\UsersController::class, 'addClient']);
+    Route::get('/profile',[App\Http\Controllers\UsersController::class, 'profile']);
+    Route::get('/countClientTable',[App\Http\Controllers\UsersController::class, 'countClientTable']);
+    Route::post('/deleteClient',[App\Http\Controllers\UsersController::class, 'deleteClient']);
 });
 
 Route::get('/logout', '\App\Http\Controllers\Auth\LoginController@logout');

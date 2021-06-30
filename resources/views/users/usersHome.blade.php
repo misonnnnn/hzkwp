@@ -1,95 +1,6 @@
-<!-- <h4>Hi users! you are logged In! </h4>
-<a class="dropdown-item" href="{{ route('logout') }}"
-   onclick="event.preventDefault();
-                 document.getElementById('logout-form').submit();">
-    {{ __('Logout') }}
-</a>
+@extends('users.usersMasterLayout')
 
-<form id="logout-form" action="{{ route('logout') }}" method="POST" class="d-none">
-    @csrf
-</form>
- -->
-<!DOCTYPE html>
-<html lang="{{ str_replace('_', '-', app()->getLocale()) }}">
-<head>
-    <title>{{ config('app.name', 'Laravel') }}</title>
-    <meta name="csrf-token" content="{{ csrf_token() }}">
-    <meta charset="utf-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
-    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css">
-      <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.7.2/css/all.css">
-    <link rel="stylesheet" type="text/css" href="https://fonts.googleapis.com/css?family=Montserrat">
-    <script src="https://code.jquery.com/jquery-3.2.1.slim.min.js"></script>
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.12.9/umd/popper.min.js"></script>
-    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/js/bootstrap.min.js"></script>
-    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
-    <link rel="stylesheet" type="text/css" href="{{ asset('css/usersDashboard.css') }}">
-
-    <style type="text/css">
-        
-    </style>
-</head>
-<body>
-    <nav class="navbar mainNav">
-        <a href="#" class="navbar-brand">
-            <i class="fa fa-cubes" style="color:#f0bb42"></i>
-            HZKWP
-        </a>
-        <ul class="nav float-lg-right">
-            <li class="nav-item">
-                <a class="nav-link" href="#"><i class="fa fa-search"></i></a>
-            </li>
-            <li class="nav-item">
-                <a class="nav-link" href="#"><i class="fa fa-bell"></i></a>
-            </li>
-            <li class="nav-item">
-                <a class="nav-link" href="#"><i class="fa fa-user"></i></a>
-            </li>
-        </ul>
-    </nav>
-    <div class="navbarDownDiv container-fluid"></div>
-
-    <div class="sidebar">
-        <div class="sidebarProfileDiv">
-            <img src="{{ asset('resources/dp.jpg') }}">
-            <p class="sidebarProfileName">{{ Auth::user()->name}}</p>
-            <p class="sidebarProfilePosition">Accountant</p>
-        </div>
-
-        <div class="mainMenu">
-            <p class="mainMenuGeneralText">General</p>
-             <ul class="nav sidebarMainmenu">
-                <li class="nav-item nav-item-active" style="width: 100%" >
-                    <a class="nav-link" href="#">
-                        <i class="fas fa-tachometer-alt"></i>
-                        Dashboard
-                    </a>
-                </li>
-
-                <li class="nav-item" style="width: 100%" >
-                    <a class="nav-link" href="#">
-                        <i class="fas fa-users"></i>
-                        Clients
-                    </a>
-                </li>
-
-                <li class="nav-item" style="width: 100%" >
-                    <a class="nav-link" href="#">
-                        <i class="fas fa-file"></i>
-                        Files
-                    </a>
-                </li>
-
-                <li class="nav-item" style="width: 100%" >
-                    <a class="nav-link" href="{{ url('/logout') }}">
-                        <i class="fas fa-sign-out-alt"></i>
-                        Log out
-                    </a>
-                </li>
-            </ul>
-        </div>
-    </div>
-
+@section('content')
     <div class="container-fluid mainContentOuter">
         <div class="mainContent">
             <div class="sidebarToggleBtn">
@@ -100,15 +11,72 @@
 
             <ol class="breadcrumb">
                 <li class="breadcrumb-item">
-                    <i class="fa fa-home"></i> Home
+                    <i class="fa fa-home"></i> 
                 </li>
                 <li class="breadcrumb-item">
                     <i class="fa fa-tachometer-alt"></i> Dashboard
                 </li>
             </ol>
+
+            <div class="greet">
+                <h5> Hi,  {{ Auth::user()->name }}!</h5>
+                <span><i class="fa fa-bell"></i> You have 2 new notifications! <a href="#">Check it now!</a></span>
+            </div>
+            
+            <div class="container">
+                <div class="row">
+                    <div class="col-md-4 col-xl-3">
+                        <div class="card bg-c-blue order-card">
+                            <div class="card-block">
+                                <h6 class="m-b-20">Active Clients</h6>
+                                <h2 class="text-right"><i class="fa fa-users f-left"></i><span>{{ $getActiveClientCounts }}</span></h2>
+                                <p class="m-b-0">Overall Clients<span class="f-right"> {{ $getClientCounts }}</span></p>
+                            </div>
+                        </div>
+                    </div>
+                    
+                    <div class="col-md-4 col-xl-3">
+                        <div class="card bg-c-green order-card">
+                            <div class="card-block">
+                                <h6 class="m-b-20">Active Clients</h6>
+                                <h2 class="text-right"><i class="fa fa-users f-left"></i><span>{{ $getActiveClientCounts }}</span></h2>
+                                <p class="m-b-0">Overall Clients<span class="f-right"> {{ $getClientCounts }}</span></p>
+                            </div>
+                        </div>
+                    </div>
+                    
+                    <div class="col-md-4 col-xl-3">
+                        <div class="card bg-c-yellow order-card">
+                            <div class="card-block">
+                                <h6 class="m-b-20">Active Clients</h6>
+                                <h2 class="text-right"><i class="fa fa-users f-left"></i><span>{{ $getActiveClientCounts }}</span></h2>
+                                <p class="m-b-0">Overall Clients<span class="f-right"> {{ $getClientCounts }}</span></p>
+                            </div>
+                        </div>
+                    </div>
+                    
+                    <div class="col-md-4 col-xl-3">
+                        <div class="card bg-c-pink order-card">
+                            <div class="card-block">
+                                <h6 class="m-b-20">Active Clients</h6>
+                                <h2 class="text-right"><i class="fa fa-users f-left"></i><span>{{ $getActiveClientCounts }}</span></h2>
+                                <p class="m-b-0">Overall Clients<span class="f-right"> {{ $getClientCounts }}</span></p>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
         </div>
     </div>
+
+    
 </body>
 </html>
-    
-    
+
+<script type="text/javascript">
+    $(document).ready(function(){
+      $('[data-toggle="tooltip"]').tooltip();
+    });
+</script>
+
+@endsection
