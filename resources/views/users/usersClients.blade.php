@@ -86,7 +86,7 @@
             <div class="form-row">
                 <div class="col form-group">
                     <label>Name / Business Name</label>
-                    <input type="text" class="form-control form-control-sm name" placeholder="Name / Business Name" required>
+                    <input type="text" class="form-control form-control-sm name inputs" placeholder="Name / Business Name" required>
                 </div>
             </div>
             <div class="form-row">
@@ -102,13 +102,13 @@
             <div class="form-row">
                 <div class="col form-group">
                     <label>Address</label>
-                    <input type="text" class="form-control form-control-sm address" placeholder="Address" required>
+                    <input type="text" class="form-control form-control-sm address inputs" placeholder="Address" required>
                 </div>
             </div>
             <div class="form-row">
                 <div class="col form-group">
                     <label>Business Classification</label>
-                    <select class="form-control form-control-sm classification" required>
+                    <select class="form-control form-control-sm classification" inputs required>
                         <option selected disabled>Select</option>   
                         <option value="individual">Individual</option>   
                         <option value="non-individual">Non-individual</option>   
@@ -116,17 +116,17 @@
                 </div>
                 <div class="col form-group">
                     <label>Tin Number</label>
-                    <input type="text" class="form-control form-control-sm tin" placeholder="000-000-000-0000" required>
+                    <input type="text" class="form-control form-control-sm tin" inputs placeholder="000-000-000-0000" required>
                 </div>
             </div>
             <div class="form-row">
                 <div class="col form-group">
                     <label>Retainers Fee</label>
-                    <input type="number" class="form-control form-control-sm rf"  placeholder="&#8369; 0" required>
+                    <input type="number" class="form-control form-control-sm rf" inputs placeholder="&#8369; 0" required>
                 </div>
                 <div class="col form-group">
                     <label>ITR Fee</label>
-                    <input type="number" class="form-control form-control-sm itr" placeholder="&#8369; 0" required>
+                    <input type="number" class="form-control form-control-sm itr" inputs placeholder="&#8369; 0" required>
                 </div>
             </div>
             <div class="form-row">
@@ -140,6 +140,7 @@
                 </div>
             </div>
 
+            
           </div>
           <div class="modal-footer">
             <small>Note: You can always change/edit this info later</small>
@@ -162,7 +163,7 @@
 
         function checkInputs() {
             var isValid = true;
-            $('input').filter('[required]').each(function() {
+            $('.inputs').filter('[required]').each(function() {
                 if ($(this).val() === '') {
             $('.submitAddClientBtn').prop('disabled', true)
                 isValid = false;

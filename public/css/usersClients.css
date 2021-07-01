@@ -5,3 +5,13 @@
 .addClientBtn:hover {
 	background: #eee;
 }
+.nofiles {
+	height: 200px;
+}
+.nofiles > p {
+	position: absolute;
+	top: 50%;
+	transform: translateY(-50%);
+	text-align: center;
+
+}

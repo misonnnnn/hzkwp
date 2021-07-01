@@ -64,8 +64,15 @@
 
             <div class="container row" style="margin-top: 20px;">
                 <div class="card files-card col-sm-3">
+                    
                     <div>
-                        <img src="{{ asset('resources/cor.jpg') }}">
+                        @if ($cor != "")
+                            <img src="{{ asset('resources/'.$cor.'') }}">
+                        @else
+                            <div class="nofiles">
+                                <p><i class="fa fa-file"></i> No [COR] uploaded yet</p>
+                            </div>
+                        @endif
                         <a href="{{ asset('resources/cor.jpg') }}" target="_BLANK" class="card-info">
                             <span><i class="fa fa-file"></i> [COR] Certificate of Registration</span>
                         </a>
@@ -74,7 +81,13 @@
 
                 <div class="card files-card col-sm-3">
                     <div>
-                        <img src="{{ asset('resources/0001.jpg') }}">
+                        @if ($sa != "")
+                            <img src="{{ asset('resources/'.$sa.'') }}">
+                        @else
+                            <div class="nofiles">
+                                <p><i class="fa fa-file"></i> No [SA] uploaded yet</p>
+                            </div>
+                        @endif
                         <a href="{{ asset('resources/0001.jpg') }}" target="_BLANK" class="card-info">
                             <span><i class="fa fa-file"></i> [SA] Service Aggrement</span>
                         </a>
@@ -97,19 +110,28 @@
             </button>
           </div>
           <div class="modal-body">
-
             <form method="POST">
-                
             <div class="form-row">
+                <input type="hidden" class="form-control form-control-sm id" value="{{ $id }}" placeholder="Name / Business Name" required>
                 <div class="col form-group">
                     <label>Name / Business Name</label>
-                    <input type="text" class="form-control form-control-sm name" value ="{{ $name }}" placeholder="Name / Business Name" required>
+                    <input type="text" class="form-control form-control-sm name" value="{{ $name }}" placeholder="Name / Business Name" required>
+                </div>
+            </div>
+            <div class="form-row">
+                <div class="col form-group">
+                    <label>Email</label>
+                    <input type="text" class="form-control form-control-sm email"  value="{{ $email }}" placeholder="Email (optional. Can input later)">
+                </div>
+                <div class="col form-group">
+                    <label>Contact Number</label>
+                    <input type="text" class="form-control form-control-sm contact"  value="{{ $contact }}" placeholder="Contact # (optional. Can input later)">
                 </div>
             </div>
             <div class="form-row">
                 <div class="col form-group">
                     <label>Address</label>
-                    <input type="text" class="form-control form-control-sm address" value ="{{ $address }}" placeholder="Address" required>
+                    <input type="text" class="form-control form-control-sm address" value="{{ $address }}" placeholder="Address" required>
                 </div>
             </div>
             <div class="form-row">
@@ -124,38 +146,61 @@
                             <option value="individual">Individual</option>   
                             <option value="non-individual" selected>Non-individual</option>
                         @endif
-                           
                     </select>
                 </div>
                 <div class="col form-group">
                     <label>Tin Number</label>
-                    <input type="text" class="form-control form-control-sm tin" value="{{ $tin }}"  placeholder="000-000-000-0000" required>
+                    <input type="text" class="form-control form-control-sm tin" value="{{ $tin }}" placeholder="000-000-000-0000" required>
                 </div>
             </div>
             <div class="form-row">
                 <div class="col form-group">
                     <label>Retainers Fee</label>
-                    <input type="number" class="form-control form-control-sm rf"  value="{{ $rf }}" placeholder="&#8369; 0" required>
+                    <input type="number" class="form-control form-control-sm rf" value="{{ $rf }}"  placeholder="&#8369; 0" required>
                 </div>
                 <div class="col form-group">
                     <label>ITR Fee</label>
                     <input type="number" class="form-control form-control-sm itr" value="{{ $itr }}" placeholder="&#8369; 0" required>
                 </div>
             </div>
-            <div class="float-left">
-                <div class="btn btn-sm">
-                    <input type="checkbox" id="activeToggle" checked data-toggle="toggle" data-on="Active" data-off="Inactive" data-onstyle="success" data-offstyle="danger">
+            <div class="form-row">
+                <div class="col form-group">
+                    <label>Date Signed</label>
+                    <input type="date" class="form-control form-control-sm dateStarted" value="{{ $startDate }}" required>
                 </div>
-                <div class="btn btn-sm btn-danger" onClick="deleteClient('{{ $id }}')">
-                    <i class="fa fa-trash"></i>
-                    delete
+                <div class="col form-group">
+                    <label>Date End</label>
+                    <input type="date" class="form-control form-control-sm dateEnd" value="{{ $endDate }}" required>
                 </div>
             </div>
+
+            <div class="form-row">
+                <div class="col form-group">
+                    <label>Upload COR</label>
+                    <input type="file" class="btn btn-sm btn-info">
+                </div>
+                <div class="col form-group">
+                    <label>Upload Service Aggreement</label>
+                    <input type="file" class="btn btn-sm btn-info">
+                </div>
+            </div>
+
+            <div class="form-row">
+                <div class="col form-group">
+                    @if ($active == '1')
+                        <input type="checkbox" checked data-toggle="toggle" class="activeToggle" data-on="Active" data-off="Inactive" data-onstyle="success" data-offstyle="danger" value="1">
+                    @else
+                        <input type="checkbox" data-toggle="toggle" class="activeToggle" data-on="Active" data-off="Inactive" data-onstyle="success" data-offstyle="danger" value="1">
+                    @endif
+                    <div class="btn btn-sm btn-danger" onclick="deleteClient('{{ $id }}')"><i class="fa fa-trash"></i> Delete</div><small> <span class="text-danger">note:</span> permanently deletes client data.</small>
+                </div>
+            </div>
+
           </div>
           <div class="modal-footer">
-            <!-- <small>Note: You can always change/edit this info later</small> -->
-            <div type="button" class="btn btn-sm btn-secondary" data-dismiss="modal">Cancel</div>
-            <button type="button" class="submitAddClientBtn btn btn-sm btn-primary" onclick="return false;">Save</button>
+            <small>Note: You can always change/edit this info later</small>
+            <div type="button" class="btn btn-sm btn-secondary" data-dismiss="modal">Close</div>
+            <button type="button" class="editClientInfoBtn btn btn-sm btn-primary" onclick="return false;">Save</button>
           </div>
         </form>
 
@@ -165,18 +210,14 @@
 </body>
 </html>
 
-<style type="text/css">
-    .custom-switch {
-        width: 200px !important;
-    }
-</style>
+
 
 <script type="text/javascript">
     $(document).ready(function(){
         $('[data-toggle="tooltip"]').tooltip();
         $('#example').DataTable();
     });
-    $('#activeToggle').bootstrapToggle('destroy').bootstrapToggle({
+    $('.activeToggle').bootstrapToggle('destroy').bootstrapToggle({
         size:     'small',
         // onstyle:  'info',
         // offstyle: 'default',
@@ -225,6 +266,57 @@
           }
         });
     }
+
+
+
+
+    $(".editClientInfoBtn").click(function(){
+        if($(".activeToggle").prop("checked") == true){
+            var activeVal = '1';
+        }else{
+            var activeVal = '0';
+        }
+        $.ajax({
+            type: "post",
+            url: "{{ url('/editClient') }}",
+            data: {
+                _token: "{{ csrf_token() }}",
+                id : $(".id").val(),
+                name : $(".name").val(),
+                email : $(".email").val(),
+                contact : $(".contact").val(),
+                address : $(".address").val(),
+                classification : $(".classification").val(),
+                tin : $(".tin").val(),
+                rf : $(".rf").val(),
+                itr : $(".itr").val(),
+                dateStarted : $(".dateStarted").val(),
+                dateEnd : $(".dateEnd").val(),
+                activeToggle : activeVal,
+            },success:function(response){
+                if (response == 'success') {
+                    Swal.fire({
+                      icon: 'success',
+                      title: 'You have Succesfully updated Client info!',
+                      showConfirmButton: false,
+                      timer: 1500
+                    })
+                    setInterval(function(){
+                        location.reload();
+                    }, 1500);
+                }else{
+                    Swal.fire({
+                      icon: 'error',
+                      title: 'Oops...',
+                      text: 'Something went wrong! Please try again',
+                    })
+                }
+
+            },error:function(response){
+                alert(JSON.stringify(response));
+            }
+        });
+    });
 </script>
 
 @endsection

@@ -28,6 +28,7 @@
     <script src="//cdn.jsdelivr.net/npm/sweetalert2@11"></script>
     <link href="https://cdn.jsdelivr.net/gh/gitbrent/bootstrap4-toggle@3.6.1/css/bootstrap4-toggle.min.css" rel="stylesheet">
     <script src="https://cdn.jsdelivr.net/gh/gitbrent/bootstrap4-toggle@3.6.1/js/bootstrap4-toggle.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/moment.js/2.29.1/moment.min.js"></script>
 
 
 
@@ -53,6 +54,17 @@
         }
         .notifPopup hr {
             margin:4px;
+        }
+        .newNotifBadge {
+            position: absolute;
+            height: 7px;
+            width: 7px;
+            border-radius: 10px;
+            background: #f0bb42;
+            margin-top: 0px;
+            margin-left: -5px;
+            display: none;
+
         }
     </style>
 </head>
@@ -86,12 +98,15 @@
                 <a class="nav-link" href="#"><i class="fa fa-search"></i></a>
             </li>
             <li class="nav-item dropdown">
-                <a class="nav-link" href="#" data-toggle="dropdown"><i class="fa fa-bell"></i></a>
+                <a class="nav-link" href="#" class="notifBtn" data-toggle="dropdown"><i class="fa fa-bell"></i><span class="newNotifBadge"></span></a>
                 <div class="dropdown-menu notifdropdown-menu animate slideIn" aria-labelledby="navbarDropdown">
                     <h6 class="dropdown-header"><i class="fa fa-bell"></i><b> Notifications</b></h6>
                     <hr style="margin:7px">
-                    <a href="#" data-toggle="tooltip" data-placement="left" title="Today at 12:03pm" class="notifUnread"><i class="fa fa-bell"></i> An Accountant wants to connect with you</a>
-                    <a href="#" data-toggle="tooltip" data-placement="left" title="Today at 12:03pm"><i class="fa fa-bell"></i> An Accountant has request for you</a>
+                    <div class="notificationDiv">
+                        <a href="#" data-toggle="tooltip" data-placement="left" title="Today at 12:03pm" class="notifUnread"><i class="fa fa-bell"></i> An Accountant wants to connect with you</a>
+                        
+                    </div>
+                    
                 </div>
             </li>
             <li class="nav-item dropdown">
@@ -205,7 +220,6 @@
         });
 
         $(document).ready(function(){
-            var title = "HZKWP";
             $(".notifPopup").hide();
             setInterval(() => {
             $.ajax({
@@ -217,6 +231,7 @@
                     var audio = new Audio('{{ url("resources/notif.mp3") }}');
                     audio.play();
                     $(".notifPopup").slideDown();
+                    $(".newNotifBadge").show();
                 }
                 setInterval(() => {
                       $(".notifPopup").slideUp();  
@@ -226,5 +241,29 @@
             });
           }, 1500);
 
+
+            $(".notifBtn").click(function(){
+                $(".newNotifBadge").hide();
+            });
+
         });
+        var html = '';
+        $.ajax({
+            type : 'GET',
+            url: '{{url("/loadNotifications")}}',
+            success:function(response) {
+                for(var i = 0; i < response.length; i++) {
+                    html += 
+                        '<a href="#" data-toggle="tooltip" data-placement="left" title="'+ moment(response[i]['created_at']).fromNow() +'" class="notifUnread">'
+                        +'<i class="fa fa-bell"></i> '
+                        +'<b>'+ response[i]['title'] +' </b>'
+                        +response[i]['body']
+                        +'</a>' 
+                    }
+                $('.notificationDiv').html(html);
+
+            },error:function(response){
+                alert(JSON.stringify(response));
+            }
+        })
     </script>
