@@ -22,6 +22,27 @@ class AdminController extends Controller
 {
     public function index(Request $request)
     {
-        return view('admin.adminHome');
+
+    	 $clients = DB::table('users')
+            ->select('*')
+            ->where('accRequest' , '0')
+            ->get();
+            return view('admin.adminHome')->with('usersData' , $clients);
+    }
+
+     public function approveAccount(Request $request)
+    {
+        $approveAccount = DB::table('users')
+        ->where('users.email',$request->email)
+        ->update([
+            'accRequest' => '1',
+        ]);
+
+        if ($approveAccount) {
+            $results = "success";
+        }else{
+            $results = "error";
+        }
+        return $results;
     }
 }

@@ -15,13 +15,13 @@
                     <i class="fa fa-home"></i> 
                 </li>
                 <li class="breadcrumb-item">
-                    <i class="fa fa-users"></i> Clients List
+                    <i class="fa fa-users"></i> Your Clients
                 </li>
             </ol>
 
             <h5 style="margin-top:60px;color:#535763"><i class="fa fa-users"></i> 
-                Clients
-
+                Your Clients
+                <a href="{{ url('/allclients')}}" class="showAllClientsLink">Show all Clients</a>
                 <div class="btn btn-sm float-right addClientBtn" data-toggle="modal" data-target="#addClientModal"><i class="fa fa-plus"></i> Add CLient</div>
             </h5>
             <hr>

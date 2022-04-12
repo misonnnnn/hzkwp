@@ -12,10 +12,10 @@
     <meta name="csrf-token" content="{{ csrf_token() }}">
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
-    <link rel="icon" href="{{ url('/resources/icon.png') }}">
+    <link rel="icon" href="{{ url('/resources/icon2.png') }}">
     <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css">
 
-    <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.7.2/css/all.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.1.1/css/all.min.css">
     <link rel="stylesheet" type="text/css" href="https://fonts.googleapis.com/css?family=Montserrat">
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
     <!-- <script src="https://code.jquery.com/jquery-3.2.1.slim.min.js"></script> -->
@@ -25,6 +25,8 @@
     <link rel="stylesheet" type="text/css" href="https://cdn.datatables.net/1.10.24/css/jquery.dataTables.min.css">
     <link rel="stylesheet" type="text/css" href="{{ asset('css/usersDashboard.css') }}">
     <link rel="stylesheet" type="text/css" href="{{ asset('css/usersClients.css') }}">
+    <link rel="stylesheet" type="text/css" href="{{ asset('css/usersAccountantInfo.css') }}">
+    <link rel="stylesheet" type="text/css" href="{{ asset('css/usersFiles.css') }}">
     <script src="//cdn.jsdelivr.net/npm/sweetalert2@11"></script>
     <link href="https://cdn.jsdelivr.net/gh/gitbrent/bootstrap4-toggle@3.6.1/css/bootstrap4-toggle.min.css" rel="stylesheet">
     <script src="https://cdn.jsdelivr.net/gh/gitbrent/bootstrap4-toggle@3.6.1/js/bootstrap4-toggle.min.js"></script>
@@ -90,12 +92,12 @@
 
     <nav class="navbar mainNav">
         <a href="#" class="navbar-brand">
-            <i class="fa fa-cubes" style="color:#f0bb42"></i>
-            HZKWP
+            <i class="fa-brands fa-buffer" style="color:#f0bb42"></i>
+            HZK Web Portal
         </a>
         <ul class="nav float-lg-right">
             <li class="nav-item">
-                <a class="nav-link" href="#"><i class="fa fa-search"></i></a>
+                <!-- <a class="nav-link" href="#"><i class="fa fa-search"></i></a> -->
             </li>
             <li class="nav-item dropdown">
                 <a class="nav-link" href="#" class="notifBtn" data-toggle="dropdown"><i class="fa fa-bell"></i><span class="newNotifBadge"></span></a>
@@ -114,7 +116,7 @@
                 <div class="dropdown-menu animate slideIn" aria-labelledby="navbarDropdown">
                     <h6 class="dropdown-header"><i class="fa fa-user"></i><b> {{ Auth::user()->name }} </b></h6>
                     <hr style="margin:5px">
-                    <a class="dropdown-item" href="#"><i class="fa fa-user"></i> View Profile</a>
+                    <a class="dropdown-item" href="{{ url('/profile') }}"><i class="fa fa-user"></i> View Profile</a>
                     <a class="dropdown-item" href="#"><i class="fa fa-wrench"></i> Settings</a>
                     <a class="dropdown-item" href="{{ url('/logout') }}"><i class="fas fa-sign-out-alt"></i> Logout</a>
                 </div>
@@ -129,6 +131,7 @@
             <img src="{{ asset('resources/'.auth::user()->picture) }}">
             <p class="sidebarProfileName">{{ Auth::user()->name}}</p>
             <p class="sidebarProfilePosition">{{ Auth::user()->position}}</p>
+            <hr>
         </div>
 
         <div class="mainMenu">
@@ -144,6 +147,15 @@
                 </li>
 
                 <li class="nav-item 
+                {{ Request::segment(1) == 'expenses' ? 'nav-item-active' : ''}}"
+                style="width: 100%" >
+                    <a class="nav-link" href="{{ url('expenses')}}">
+                        <i class="fa-solid fa-coins"></i>
+                        Expenses
+                    </a>
+                </li>
+
+                <li class="nav-item 
                 {{ Request::segment(1) == 'clients' ? 'nav-item-active' : ''}}"
                 style="width: 100%" >
                     <a class="nav-link" href="{{ url('clients')}}">
@@ -152,22 +164,37 @@
                     </a>
                 </li>
 
-                <li class="nav-item" style="width: 100%" >
-                    <a class="nav-link" href="#">
+                <li class="nav-item 
+                {{ Request::segment(1) == 'accountants' ? 'nav-item-active' : ''}}" 
+                style="width: 100%" >
+                    <a class="nav-link" href="{{ url('accountants')}}">
                         <i class="fas fa-user-friends"></i>
                         Accountants
                     </a>
                 </li>
 
-                <li class="nav-item" style="width: 100%" >
-                    <a class="nav-link" href="#">
+                <li class="nav-item 
+                {{ Request::segment(1) == 'files' ? 'nav-item-active' : ''}}" 
+                style="width: 100%" >
+                    <a class="nav-link" href="{{ url('files')}}">
                         <i class="fas fa-file"></i>
-                        Files
+                        Client Files
                     </a>
                 </li>
 
-                <li class="nav-item" style="width: 100%" >
-                    <a class="nav-link" href="#">
+                <li class="nav-item 
+                {{ Request::segment(1) == 'file-dialog' ? 'nav-item-active' : ''}}" 
+                style="width: 100%" >
+                    <a class="nav-link" href="{{ url('file-dialog')}}">
+                        <i class="fa-solid fa-laptop-file"></i>
+                        Files Dialog
+                    </a>
+                </li>
+
+                <li class="nav-item 
+                {{ Request::segment(1) == 'settings' ? 'nav-item-active' : ''}}" 
+                style="width: 100%" >
+                    <a class="nav-link" href="{{ url('/settings') }}">
                         <i class="fas fa-wrench"></i>
                         Settings
                     </a>

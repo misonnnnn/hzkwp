@@ -1,0 +1,50 @@
+
+.accDP{
+	height: 150px;1
+	width:150px;
+	border-radius: 3px;
+	padding:2px;
+	box-shadow: 0 0 4px 0 #444;
+	margin-right: 10px;
+}
+.accMainDetails {
+	position: relative;
+	margin-top: -50px;
+	margin-left: 180px;
+}
+.accName{
+	color:#535763;
+	margin:0px;
+	padding:0px;
+	text-transform: uppercase;
+}
+.accSub{
+	color:#535763;
+	margin:0px;
+	padding:0px;
+}
+.accContactDiv{
+	height: 400px;
+	width: 100%;
+	border-radius: 3px;
+	box-shadow: 0 0 3px 0 #bbb;
+	padding:10px;
+}
+.accContactDiv > h6 {
+	padding:10px;
+}
+.accContactDiv > p {
+	padding:0px;
+	margin:5px;
+}
+
+.accAbout {
+	height: 200px;
+	width: 100%;
+	border-radius: 3px;
+	box-shadow: 0 0 3px 0 #bbb;
+	padding:10px;
+}
+.accAbout > h6{
+	padding: 10px;
+}

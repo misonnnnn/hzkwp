@@ -64,33 +64,129 @@
 
             <div class="container row" style="margin-top: 20px;">
                 <div class="card files-card col-sm-3">
-                    
                     <div>
                         @if ($cor != "")
-                            <img src="{{ asset('resources/'.$cor.'') }}">
+                            <img src="{{ asset('images/cor/'.$cor.'') }}">
                         @else
                             <div class="nofiles">
                                 <p><i class="fa fa-file"></i> No [COR] uploaded yet</p>
                             </div>
+                            <style type="text/css">
+                                .disabledBtn {
+                                    pointer-events: none;
+                                    cursor: default;
+                                    opacity: .3;
+                                }
+                            </style>
                         @endif
-                        <a href="{{ asset('resources/cor.jpg') }}" target="_BLANK" class="card-info">
+                        <p class="card-info">
                             <span><i class="fa fa-file"></i> [COR] Certificate of Registration</span>
-                        </a>
+                            <div class="uploadBtn">
+                                 <a href="{{ url('images/cor/'.$cor.'')}}" target="_BLANK" class="btn btn-sm btn-info"><i class="fa fa-eye"></i> View</a>
+                                 <div class="btn btn-sm btn-info" data-toggle="modal" data-target="#uploadCorModal">Upload COR</div>
+                                 <div class="float-right btn btn-sm btn-danger"><i class="fa fa-trash"></i></div>
+                            </div>
+                        </p>
                     </div>
+
                 </div>
+
+
+                @if(session()->has('success'))
+                    <script type="text/javascript">
+                       Swal.fire({
+                          icon: 'success',
+                          title: 'Succesfully Uploaded!',
+                          showConfirmButton: false,
+                          timer: 1500
+                        })
+                    </script>
+
+                @elseif(session()->has('error'))
+                    <script type="text/javascript">
+                       Swal.fire({
+                          icon: 'error',
+                          title: 'error occured',
+                          showConfirmButton: false,
+                          timer: 1500
+                        })
+                    </script>
+                @endif
 
                 <div class="card files-card col-sm-3">
                     <div>
                         @if ($sa != "")
-                            <img src="{{ asset('resources/'.$sa.'') }}">
+                            <img class="saImage" src="{{ asset('images/sa/'.$sa.'') }}">
                         @else
                             <div class="nofiles">
                                 <p><i class="fa fa-file"></i> No [SA] uploaded yet</p>
                             </div>
+                            <style type="text/css">
+                                .disabledBtn {
+                                    pointer-events: none;
+                                    cursor: default;
+                                    opacity: .3;
+                                }
+                            </style>
                         @endif
-                        <a href="{{ asset('resources/0001.jpg') }}" target="_BLANK" class="card-info">
+                        <p class="card-info">
                             <span><i class="fa fa-file"></i> [SA] Service Aggrement</span>
-                        </a>
+                            <div class="uploadBtn">
+                                <a href="{{ url('images/sa/'.$sa.'')}}" target="_BLANK" class="disabledBtn btn btn-sm btn-info"><i class="fa fa-eye"></i> View</a>
+                                 <div class="btn btn-sm btn-info" data-toggle="modal" data-target="#uploadSaModal">Upload SA</div>
+                                  <div class="disabledBtn float-right btn btn-sm btn-danger"><i class="fa fa-trash"></i></div>
+                            </div>
+                        </p>
+                    </div>
+                </div>
+
+                <div class="modal fade" id="uploadSaModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+                    <div class="modal-dialog" role="document">
+                        <div class="modal-content">
+                            <form action="/saUpload" method="POST" enctype="multipart/form-data">
+                            @csrf
+                            <div class="modal-header">
+                                <h6 class="modal-title" id="exampleModalLabel"><i class="fa fa-file"></i> Upload Service Aggrement Image</h6>
+                                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                                    <span aria-hidden="true">&times;</span>
+                                </button>
+                            </div>
+                            <div class="modal-body">
+                                    <input type="hidden" value="{{ $id }}" name="clientId">
+                                    <input type="file" name="image[]" multiple="multiple" accept="image/png, image/gif, image/jpeg" />
+                            </div>
+                            <div class="modal-footer">
+                                <button type="button" class="btn btn-sm btn-secondary" data-dismiss="modal">Cancel</button>
+                                <button type="submit" class="btn btn-sm btn-primary">Upload</button>
+                            </div>
+                            </form>
+
+                        </div>
+                    </div>
+                </div>
+
+                <div class="modal fade" id="uploadCorModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+                    <div class="modal-dialog" role="document">
+                        <div class="modal-content">
+                            <form action="/corUpload" method="POST" enctype="multipart/form-data">
+                            @csrf
+                            <div class="modal-header">
+                                <h6 class="modal-title" id="exampleModalLabel"><i class="fa fa-file"></i> Upload Certificate of Registration</h6>
+                                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                                    <span aria-hidden="true">&times;</span>
+                                </button>
+                            </div>
+                            <div class="modal-body">
+                                    <input type="hidden" value="{{ $id }}" name="clientId">
+                                    <input type="file" name="image">
+                            </div>
+                            <div class="modal-footer">
+                                <button type="button" class="btn btn-sm btn-secondary" data-dismiss="modal">Cancel</button>
+                                <button type="submit" class="btn btn-sm btn-primary">Upload</button>
+                            </div>
+                            </form>
+
+                        </div>
                     </div>
                 </div>
             </div>
@@ -110,7 +206,7 @@
             </button>
           </div>
           <div class="modal-body">
-            <form method="POST">
+            <form method="POST" enctype="multipart/form-data">
             <div class="form-row">
                 <input type="hidden" class="form-control form-control-sm id" value="{{ $id }}" placeholder="Name / Business Name" required>
                 <div class="col form-group">
@@ -174,28 +270,30 @@
                 </div>
             </div>
 
-            <div class="form-row">
+           <!--  <div class="form-row">
                 <div class="col form-group">
                     <label>Upload COR</label>
-                    <input type="file" class="btn btn-sm btn-info">
+                    <input type="file" class="corUpload btn btn-sm btn-info">
                 </div>
                 <div class="col form-group">
                     <label>Upload Service Aggreement</label>
                     <input type="file" class="btn btn-sm btn-info">
                 </div>
-            </div>
-
+            </div> -->
+<!-- 
+    https://stackoverflow.com/questions/19447435/ajax-upload-image 
+    https://stackoverflow.com/questions/2320069/jquery-ajax-file-upload
+-->
             <div class="form-row">
                 <div class="col form-group">
                     @if ($active == '1')
                         <input type="checkbox" checked data-toggle="toggle" class="activeToggle" data-on="Active" data-off="Inactive" data-onstyle="success" data-offstyle="danger" value="1">
-                    @else
+                    @else                
                         <input type="checkbox" data-toggle="toggle" class="activeToggle" data-on="Active" data-off="Inactive" data-onstyle="success" data-offstyle="danger" value="1">
                     @endif
-                    <div class="btn btn-sm btn-danger" onclick="deleteClient('{{ $id }}')"><i class="fa fa-trash"></i> Delete</div><small> <span class="text-danger">note:</span> permanently deletes client data.</small>
+                    <div class="btn btn-sm btn-danger" onclick="deleteClient('{{ $id }}')"><i class="fa fa-trash"></i> Delete</div><small> <span class="text-danger">note:</span> "Delete" button permanently deletes client data.</small>
                 </div>
             </div>
-
           </div>
           <div class="modal-footer">
             <small>Note: You can always change/edit this info later</small>
@@ -213,6 +311,12 @@
 
 
 <script type="text/javascript">
+
+    $.ajaxSetup({
+        headers: {
+            'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
+        }
+    });
     $(document).ready(function(){
         $('[data-toggle="tooltip"]').tooltip();
         $('#example').DataTable();
@@ -230,7 +334,7 @@
     function deleteClient(id){
         Swal.fire({
           title: 'Are you sure?',
-          text: "This will delete all the data of the client?",
+          text: "This will delete all the data of the client.",
           icon: 'warning',
           showCancelButton: true,
           confirmButtonColor: '#3085d6',
@@ -270,12 +374,19 @@
 
 
 
-    $(".editClientInfoBtn").click(function(){
+    // $(".editClientInfoBtn").click(function(){
+
+        $('.editClientInfoBtn').on('click', function(){
+        // alert($("#corUpload")[0]);
         if($(".activeToggle").prop("checked") == true){
             var activeVal = '1';
         }else{
             var activeVal = '0';
         }
+
+       
+
+
         $.ajax({
             type: "post",
             url: "{{ url('/editClient') }}",
@@ -310,13 +421,23 @@
                       title: 'Oops...',
                       text: 'Something went wrong! Please try again',
                     })
+                    console.log(response);
+                    // alert(JSON.stringify(response));
                 }
-
             },error:function(response){
+                console.log(response);
                 alert(JSON.stringify(response));
             }
         });
     });
+
+
+    
+
+
+
+
+
 </script>
 
 @endsection
