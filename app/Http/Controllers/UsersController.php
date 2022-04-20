@@ -59,6 +59,7 @@ class UsersController extends Controller
                 ->where('accountant_id',Auth::user()->id)
                 ->get();
                 return view('users.usersClients')->with('clientsData' , $clients);
+
             }elseif ($request->path() == 'allclients') {
                 $clients = DB::table('clients')
                 ->select('*')
@@ -149,27 +150,38 @@ class UsersController extends Controller
     {
     	$clientDetails = DB::table('clients')
 				->select('*')
-				->where('id' , $request->clientsId)
+                ->where([
+                    ['id' ,'=', $request->clientsId],
+                    // ['accountant_id' ,'=', auth::user()->id],
+                ])
 				->first();
-    	return view('users.usersGetClients')
-    		->with([
-    			'id'	=>	$clientDetails->id,
+        if ($clientDetails) {
+           return view('users.usersGetClients')
+            ->with([
+                'id'    =>  $clientDetails->id,
+                'accountant_id'    =>  $clientDetails->accountant_id,
                 'name'  =>  $clientDetails->name,
                 'email'  =>  $clientDetails->email,
                 'contact'  =>  $clientDetails->contact,
-    			'address'	=>	$clientDetails->address,
-    			'businessClass'	=>	$clientDetails->businessClass,
-    			'active'	=>	$clientDetails->active,
-    			'email'	=>	$clientDetails->email,
-    			'contact'	=>	$clientDetails->contact,
+                'address'   =>  $clientDetails->address,
+                'businessClass' =>  $clientDetails->businessClass,
+                'active'    =>  $clientDetails->active,
+                'email' =>  $clientDetails->email,
+                'contact'   =>  $clientDetails->contact,
                 'tin'   =>  $clientDetails->tin,
                 'rf'   =>  $clientDetails->retainersFee,
                 'itr'   =>  $clientDetails->itr,
                 'startDate'   =>  $clientDetails->startDate,
                 'endDate'   =>  $clientDetails->endDate,
                 'cor'   =>  $clientDetails->cor,
-    			'sa'	=>	$clientDetails->serviceAgreement,
-    			]);
+                'sa'    =>  $clientDetails->serviceAgreement,
+                ]);
+        } else {
+            abort(404);
+        }
+        
+
+    	
     }
     public function getClientCounts(Request $request)
     {
@@ -200,6 +212,8 @@ class UsersController extends Controller
             'title' => 'New Client',
             'body' => ' Horray! ' .  $request->name . ' just signed a contract with us!',
             ]);
+
+        
 
         if ($addClients) {
             $results = "success";

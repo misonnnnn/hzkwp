@@ -21,7 +21,7 @@
 
             <h5 style="margin-top:60px;color:#535763"><i class="fa fa-users"></i> 
                 Your Clients
-                <a href="{{ url('/allclients')}}" class="showAllClientsLink">Show all Clients</a>
+                <a href="{{ url('/allclients')}}" class="btn btn-outline-info btn-sm showAllClientsLink">Show all Clients</a>
                 <div class="btn btn-sm float-right addClientBtn" data-toggle="modal" data-target="#addClientModal"><i class="fa fa-plus"></i> Add CLient</div>
             </h5>
             <hr>

@@ -1,6 +1,9 @@
 <?php
 
 use Illuminate\Support\Facades\Route;
+use App\Http\Controllers\SendEmailController;
+
+
 
 /*
 |--------------------------------------------------------------------------
@@ -13,11 +16,21 @@ use Illuminate\Support\Facades\Route;
 |
 */
 
-Route::get('/', function () {
-    return view('welcome');
+Route::get('/emailtemplate', function () {
+    return view('email.demoEmail');
 });
 
+
+
 Auth::routes();
+
+ Route::get('',[App\Http\Controllers\HomeController::class, 'index']);
+ Route::get('/signup',[App\Http\Controllers\HomeController::class, 'index']);
+Route::get('/emailVerifyNotice', [App\Http\Controllers\HomeController::class, 'index']);
+Route::get('send-email', [SendEmailController::class, 'index']);
+Route::get('verify/{emailToken}', [App\Http\Controllers\HomeController::class, 'emailVerification']);
+
+
 
 Route::group(['middleware' => 'isAdmin'], function () {
     Route::get('/admin',[App\Http\Controllers\AdminController::class, 'index']);

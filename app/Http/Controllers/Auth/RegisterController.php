@@ -1,13 +1,15 @@
 <?php
 
 namespace App\Http\Controllers\Auth;
-
 use App\Http\Controllers\Controller;
 use App\Providers\RouteServiceProvider;
 use App\Models\User;
 use Illuminate\Foundation\Auth\RegistersUsers;
 use Illuminate\Support\Facades\Hash;
 use Illuminate\Support\Facades\Validator;
+use Illuminate\Support\Str;
+use Mail;
+use App\Mail\VerifyMail;
 
 class RegisterController extends Controller
 {
@@ -29,7 +31,7 @@ class RegisterController extends Controller
      *
      * @var string
      */
-    protected $redirectTo = '/login';
+    protected $redirectTo = '/emailVerifyNotice';
 
     /**
      * Create a new controller instance.
@@ -63,12 +65,33 @@ class RegisterController extends Controller
      * @return \App\Models\User
      */
     protected function create(array $data)
-    {
+    {   
+
+        $var = Str::random(70);
+
+        $dt = [
+            'emailToken' => $var,
+        ];  
+
+        Mail::to($data['email'])->send(new VerifyMail($dt));
+ 
+      // if (Mail::failures()) {
+      //      return response()->Fail('Sorry! Please try again latter');
+      // }else{
+      //      return response()->json('Great! Successfully send in your mail');
+      //    }
+
         return User::create([
             'role' => 'user',
             'name' => $data['name'],
             'email' => $data['email'],
             'password' => Hash::make($data['password']),
+            'emailToken' => $var,
         ]);
-    }
+
+        }
+
+
+        
+    
 }

@@ -24,11 +24,14 @@
             <h5 style="margin-top:60px;color:#535763">
                 <i class="far fa-address-book"></i> 
                 Client Handling
+
+                @if ($accountant_id == auth()->user()->id)
                  <div class="btn btn-sm float-right addClientBtn" data-toggle="modal" data-target="#editClientModal"><i class="fa fa-edit" style="margin-left: 10px;"></i> Edit Info</div>
 
                  <div class="btn btn-sm btn-info float-right" data-toggle="modal" data-target="#editClientModal"><i class="fa fa-file"></i> Make SOA</div>
 
                 <!-- <i class="fa fa-search float-right" style="cursor: pointer;"></i> -->
+                @endif
             </h5>
 
             <hr>

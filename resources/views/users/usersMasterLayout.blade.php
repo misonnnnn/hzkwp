@@ -12,7 +12,6 @@
     <meta name="csrf-token" content="{{ csrf_token() }}">
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
-    <link rel="icon" href="{{ url('/resources/icon2.png') }}">
     <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css">
 
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.1.1/css/all.min.css">
@@ -32,6 +31,7 @@
     <script src="https://cdn.jsdelivr.net/gh/gitbrent/bootstrap4-toggle@3.6.1/js/bootstrap4-toggle.min.js"></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/moment.js/2.29.1/moment.min.js"></script>
 
+    <link rel="icon" href="{{ asset('/resources/icon2.png') }}">
 
 
     <style type="text/css">
@@ -276,7 +276,7 @@
         });
         var html = '';
         $.ajax({
-            type : 'GET',
+            type : 'get',
             url: '{{url("/loadNotifications")}}',
             success:function(response) {
                 for(var i = 0; i < response.length; i++) {
@@ -289,8 +289,9 @@
                     }
                 $('.notificationDiv').html(html);
 
-            },error:function(response){
-                alert(JSON.stringify(response));
             }
+            // ,error:function(response){
+            //     alert(JSON.stringify(response));
+            // }
         })
     </script>

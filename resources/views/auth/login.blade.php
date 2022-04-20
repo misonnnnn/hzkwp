@@ -51,6 +51,11 @@
             <label>Password</label>
             <input id="password" type="password" class="form-control form-control-sm input @error('password') is-invalid @enderror" name="password" required autocomplete="current-password" placeholder="Password">  
           </div>
+
+          <div class="form-group">
+            <a href="{{ url('register') }}">Sign Up here</a>
+          </div>
+
           <div class="form-group">
             <button type="submit" class="btn btn-sm btn-primary button" id="submit">Login</button>          
           </div>
