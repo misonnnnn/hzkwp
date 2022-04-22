@@ -25,7 +25,7 @@
             <hr>
             <div class="container containerDiv">
                 <div class="row rowDiv">
-                    <div class="col-sm-12 col-md-4 col-lg-3">
+                    <div class="col-sm-12 col-md-6 col-lg-3">
                         <a href="{{url('files/cor')}}"><div class="file-div">
                             <p class="folder_name">COR</p>
                             <hr>
@@ -33,7 +33,7 @@
                             <div class="folder"></div>
                         </div></a>
                     </div>
-                    <div class="col-sm-12 col-md-4 col-lg-3">
+                    <div class="col-sm-12 col-md-6 col-lg-3">
                         <a href="{{url('files/serviceagreement')}}"><div class="file-div">
                             <p class="folder_name">Service Agreement</p>
                             <hr>
@@ -41,7 +41,7 @@
                             <div class="folder"></div>
                         </div></a>
                     </div>
-                    <div class="col-sm-12 col-md-4 col-lg-3">
+                    <div class="col-sm-12 col-md-6 col-lg-3">
                         <div class="file-div">
                             <p class="folder_name">SOA</p>
                             <hr>
@@ -49,7 +49,7 @@
                             <div class="folder"></div>
                         </div>
                     </div>
-                    <div class="col-sm-12 col-md-4 col-lg-3">
+                    <div class="col-sm-12 col-md-6 col-lg-3">
                         <div class="file-div">
                             <p class="folder_name">ITR</p>
                             <hr>
@@ -57,7 +57,7 @@
                             <div class="folder"></div>
                         </div>
                     </div>
-                    <div class="col-sm-12 col-md-4 col-lg-3">
+                    <div class="col-sm-12 col-md-6 col-lg-3">
                         <div class="file-div">
                             <p class="folder_name">Business Permit</p>
                             <hr>
@@ -65,7 +65,7 @@
                             <div class="folder"></div>
                         </div>
                     </div>
-                    <div class="col-sm-12 col-md-4 col-lg-3">
+                    <div class="col-sm-12 col-md-6 col-lg-3">
                         <div class="file-div">
                             <p class="folder_name">SEC Articles</p>
                             <hr>
@@ -73,7 +73,7 @@
                             <div class="folder"></div>
                         </div>
                     </div>
-                    <div class="col-sm-12 col-md-4 col-lg-3">
+                    <div class="col-sm-12 col-md-6 col-lg-3">
                         <div class="file-div">
                             <p class="folder_name">GIS</p>
                             <hr>
@@ -81,7 +81,7 @@
                             <div class="folder"></div>
                         </div>
                     </div>
-                    <div class="col-sm-12 col-md-4 col-lg-3">
+                    <div class="col-sm-12 col-md-6 col-lg-3">
                         <div class="file-div">
                             <p class="folder_name">DTI</p>
                             <hr>
@@ -89,7 +89,7 @@
                             <div class="folder"></div>
                         </div>
                     </div>
-                    <div class="col-sm-12 col-md-4 col-lg-3">
+                    <div class="col-sm-12 col-md-6 col-lg-3">
                         <div class="file-div">
                             <p class="folder_name">Contract of Lease</p>
                             <hr>
@@ -97,7 +97,7 @@
                             <div class="folder"></div>
                         </div>
                     </div>
-                    <div class="col-sm-12 col-md-4 col-lg-3">
+                    <div class="col-sm-12 col-md-6 col-lg-3">
                         <div class="file-div">
                             <p class="folder_name">Clients Valid ID's (sole prop.)</p>
                             <hr>
@@ -105,7 +105,7 @@
                             <div class="folder"></div>
                         </div>
                     </div>
-                    <div class="col-sm-12 col-md-4 col-lg-3">
+                    <div class="col-sm-12 col-md-6 col-lg-3">
                         <div class="file-div">
                             <p class="folder_name">Clients Valid ID's (partnership.)</p>
                             <hr>
@@ -113,7 +113,7 @@
                             <div class="folder"></div>
                         </div>
                     </div>
-                    <div class="col-sm-12 col-md-4 col-lg-3">
+                    <div class="col-sm-12 col-md-6 col-lg-3">
                         <div class="file-div">
                             <p class="folder_name">Stock holder Valid ID's</p>
                             <hr>

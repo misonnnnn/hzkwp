@@ -26,9 +26,9 @@
                 Client Handling
 
                 @if ($accountant_id == auth()->user()->id)
-                 <div class="btn btn-sm float-right addClientBtn" data-toggle="modal" data-target="#editClientModal"><i class="fa fa-edit" style="margin-left: 10px;"></i> Edit Info</div>
+                 <div class="btn btn-sm float-right addClientBtn fsebj fsebj1" data-toggle="modal" data-target="#editClientModal"><i class="fa fa-edit" style="margin-left: 10px;"></i> Edit Info</div>
 
-                 <div class="btn btn-sm btn-info float-right" data-toggle="modal" data-target="#editClientModal"><i class="fa fa-file"></i> Make SOA</div>
+                 <div class="btn btn-sm btn-info float-right fsebj fsebj2" data-toggle="modal" data-target="#"><i class="fa fa-file"></i> Make SOA</div>
 
                 <!-- <i class="fa fa-search float-right" style="cursor: pointer;"></i> -->
                 @endif
@@ -47,26 +47,26 @@
             </span>
 
             <div class="row" style="width: 50%;">
-                <p class="col-sm-6" style="font-size: 13px;color:#535763;width: 100%;margin:0">
+                <p class="col-lg-6" style="font-size: 13px;color:#535763;width: 100%;margin:0">
                     <i class="fas fa-tags"></i>
                     {!! $active == '1' ? '<span class="badge badge-success">Active</span>' : '<span class="badge badge-danger">Inactive</span>' !!}
                 </p>
-                <p class="col-sm-6" style="font-size: 13px;color:#535763;width: 100%;margin:0">
+                <p class="col-lg-6 col-sm-12" style="font-size: 13px;color:#535763;width: 100%;margin:0">
                     <i class="fas fa-tags"></i> 
                     {{ $businessClass }}
                 </p>
-                <p class="col-sm-6" style="font-size: 13px;color:#535763;width: 100%;margin:0">
+                <p class="col-lg-6 col-sm-12" style="font-size: 13px;color:#535763;width: 100%;margin:0">
                     <i class="fas fa-envelope"></i> 
                     {{ $email !='' ? $email : 'email not provided'}}
                 </p>
-                <p class="col-sm-6" style="font-size: 13px;color:#535763;width: 100%;margin:0">
+                <p class="col-lg-6 col-sm-12" style="font-size: 13px;color:#535763;width: 100%;margin:0">
                     <i class="fas fa-phone"></i>
                     {{ $contact !='' ? $contact : 'contact not provided'}}
                 </p>
             </div>
 
             <div class="container row" style="margin-top: 20px;">
-                <div class="card files-card col-sm-3">
+                <div class="card files-card col-lg-3 col-sm-12">
                     <div>
                         @if ($cor != "")
                             <img src="{{ asset('images/cor/'.$cor.'') }}">
@@ -116,10 +116,14 @@
                     </script>
                 @endif
 
-                <div class="card files-card col-sm-3">
+                <div class="card files-card col-lg-3 col-sm-12">
                     <div>
                         @if ($sa != "")
-                            <img class="saImage" src="{{ asset('images/sa/'.$sa.'') }}">
+                            <!-- <img class="saImage" src="{{ asset('images/sa/'.$sa.'') }}"> -->
+
+                            @foreach(explode(',', $sa) as $servAgreeImg) 
+                                <img class="saImage" src="{{ asset('images/sa/'.$servAgreeImg.'') }}">
+                            @endforeach
                         @else
                             <div class="nofiles">
                                 <p><i class="fa fa-file"></i> No [SA] uploaded yet</p>
@@ -129,13 +133,13 @@
                                     pointer-events: none;
                                     cursor: default;
                                     opacity: .3;
-                                }
+                                }http://127.0.0.1:8000/files/serviceagreement/42
                             </style>
                         @endif
                         <p class="card-info">
                             <span><i class="fa fa-file"></i> [SA] Service Aggrement</span>
                             <div class="uploadBtn">
-                                <a href="{{ url('images/sa/'.$sa.'')}}" target="_BLANK" class="disabledBtn btn btn-sm btn-info"><i class="fa fa-eye"></i> View</a>
+                                <a href="{!! url('files/serviceagreement/'.$id.'')!!}" target="_BLANK" class="disabledBtn btn btn-sm btn-info"><i class="fa fa-eye"></i> View</a>
                                  <div class="btn btn-sm btn-info" data-toggle="modal" data-target="#uploadSaModal">Upload SA</div>
                                   <div class="disabledBtn float-right btn btn-sm btn-danger"><i class="fa fa-trash"></i></div>
                             </div>
@@ -442,6 +446,23 @@
 
 
 </script>
+
+
+<style type="text/css">
+    @media screen and (max-width: 800px){
+        .fsebj {
+            float: none;
+            width: 100%;
+        }
+        .fsebj1 {
+            margin-top: 20px;
+        }
+        .fsebj2 {
+            margin-bottom: 20px;
+            margin-top: 5px;
+        }
+    }
+</style>
 
 @endsection
     

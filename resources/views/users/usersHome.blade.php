@@ -79,7 +79,7 @@
 
             <div class="container-fluid" style="margin-top: 30px;">
                 <div class="row">
-                    <div class="col-4 activity_div">
+                    <div class="col-lg-4 col-md-6 col-sm-12 activity_div">
                         <h6>Activities <i class="fas fa-tasks"></i></h6>
                         <hr>
 
@@ -96,7 +96,7 @@
 
                     </div>
 
-                    <div class="col-4 announcement_div">
+                    <div class="col-lg-4 col-md-6 col-sm-12 announcement_div">
                         <h6>Announcements <i class="fas fa-stream"></i></h6>
                         <hr>
 

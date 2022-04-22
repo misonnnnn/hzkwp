@@ -21,7 +21,7 @@
             </ol>
 
             <h5 style="margin-top:60px;color:#535763">
-                <i class="fa-solid fa-coins"></i> Expenses
+                <i class="fa-solid fa-coins"></i> Your Expenses
 
             </h5>
             <hr>

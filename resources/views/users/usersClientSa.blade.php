@@ -36,7 +36,7 @@
             <div class="container">
                 <div class="row frontCor">
                   @foreach ($cor as $cordata)
-                    <div class="col-sm-3">
+                    <div class="col-sm-12 col-md-6 col-lg-3">
                         <a href="{{ url('files/serviceagreement/'.$cordata->clientId) }}"><div class="file-div">
                             <p class="folder_name">{{ $cordata->clientName }}</p>
                             <hr>
@@ -104,7 +104,7 @@
                             }else{
                                 fileInside = '<div class="fileInside"></div>';
                             }
-                          html +=  '<div class="col-sm-3">'
+                          html +=  '<div class="col-sm-12 col-md-6 col-lg-3">'
                                     +'<a href="#"><div class="file-div">'
                                       +'<p class="folder_name">' + item['clientName'] + '</p>'
                                       +'<hr>'
@@ -135,6 +135,15 @@
         padding:5px;
         margin-top: -10px;
         box-shadow: 0 0 3px 0 #aaa;
+    }
+
+
+    @media screen and (max-width: 800px){
+        .searchCorDiv {
+            float: none;
+            width: 100%;
+            margin-top: 20px;
+        }
     }
     .searchCor{
         padding:3px;

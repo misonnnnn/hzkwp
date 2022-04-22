@@ -117,7 +117,7 @@
                     <h6 class="dropdown-header"><i class="fa fa-user"></i><b> {{ Auth::user()->name }} </b></h6>
                     <hr style="margin:5px">
                     <a class="dropdown-item" href="{{ url('/profile') }}"><i class="fa fa-user"></i> View Profile</a>
-                    <a class="dropdown-item" href="#"><i class="fa fa-wrench"></i> Settings</a>
+                    <a class="dropdown-item" href="{{ url('/settings') }}"><i class="fa fa-wrench"></i> Settings</a>
                     <a class="dropdown-item" href="{{ url('/logout') }}"><i class="fas fa-sign-out-alt"></i> Logout</a>
                 </div>
 
@@ -191,12 +191,21 @@
                     </a>
                 </li>
 
-                <li class="nav-item 
+                <li onclick="loadingModal();" class="nav-item 
                 {{ Request::segment(1) == 'settings' ? 'nav-item-active' : ''}}" 
                 style="width: 100%" >
                     <a class="nav-link" href="{{ url('/settings') }}">
                         <i class="fas fa-wrench"></i>
                         Settings
+                    </a>
+                </li>
+
+                <li class="nav-item 
+                {{ Request::segment(1) == 'profile' ? 'nav-item-active' : ''}}" 
+                style="width: 100%" >
+                    <a class="nav-link" href="{{ url('/profile') }}">
+                        <i class="fas fa-user"></i>
+                        Profile
                     </a>
                 </li>
 
@@ -210,10 +219,32 @@
         </div>
     </div>
 
+    <div class="loadingModal fade" data-backdrop="static" data-keyboard="false" tabindex="-1">
+       <i class="fas fa-spinner fa-spin" style="position: absolute;left: 50%;top: 50%;transform: translate(-50%,-50%);font-size: 70px;color:#55a7bf;"></i>
+    </div>
 
 
 
     @yield('content')
+
+       <script type="text/javascript">
+        $("a").click(function(){
+            if (/#/.test(this.href) || $(this).attr('target') == '_BLANK'){
+            //if ($(this).is('[href*="#"]')) {
+                e.preventDefault();
+            }else{
+                loadingModal();
+            }
+        });
+
+        function loadingModal(){
+            $('.loadingModal').modal('show');
+                setTimeout(function () {
+                    alert('slow internet connection. Please reload this page');
+                }, 10000);
+            }
+            
+    </script>
 
     <script type="text/javascript">
         (function($) {
@@ -230,22 +261,43 @@
             };
         }(jQuery));
         
+           if($(window).width()<965){
+                $(".sidebar").addClass("sidebarOff");
+                $(".sidebar").removeClass("sidebarOn");
+                $(".mainContentOuter").addClass("mainContentExpand");
+                $(".mainContentOuter").removeClass("mainContentExpandOff");
+
+                $('.sidebarToggleBtn').clickToggle(
+                    function() {   
+                        $(".sidebar").removeClass("sidebarOff");
+                        $(".sidebar").addClass("sidebarOn");
+                        $(".mainContentOuter").removeClass("mainContentExpand");
+                        $(".mainContentOuter").addClass("mainContentExpandOff");
+                    },
+                    function() {
+                        $(".sidebar").addClass("sidebarOff");
+                        $(".sidebar").removeClass("sidebarOn");
+                        $(".mainContentOuter").addClass("mainContentExpand");
+                        $(".mainContentOuter").removeClass("mainContentExpandOff");
+                    });
+
+           }else{
+                $('.sidebarToggleBtn').clickToggle(
+                    function() {   
+                        $(".sidebar").addClass("sidebarOff");
+                        $(".sidebar").removeClass("sidebarOn");
+                        $(".mainContentOuter").addClass("mainContentExpand");
+                        $(".mainContentOuter").removeClass("mainContentExpandOff");
+                    },
+                    function() {
+                        $(".sidebar").removeClass("sidebarOff");
+                        $(".sidebar").addClass("sidebarOn");
+                        $(".mainContentOuter").removeClass("mainContentExpand");
+                        $(".mainContentOuter").addClass("mainContentExpandOff");
+                    });
+           }
+
        
-
-       $('.sidebarToggleBtn').clickToggle(
-        function() {   
-            $(".sidebar").addClass("sidebarOff");
-            $(".sidebar").removeClass("sidebarOn");
-            $(".mainContentOuter").addClass("mainContentExpand");
-            $(".mainContentOuter").removeClass("mainContentExpandOff");
-        },
-        function() {
-            $(".sidebar").removeClass("sidebarOff");
-            $(".sidebar").addClass("sidebarOn");
-            $(".mainContentOuter").removeClass("mainContentExpand");
-            $(".mainContentOuter").addClass("mainContentExpandOff");
-        });
-
         $(document).ready(function(){
             $(".notifPopup").hide();
             setInterval(() => {
